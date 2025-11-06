@@ -1,7 +1,7 @@
 // DSLParser.g4
 parser grammar DSLParser;
 
-options { tokenVocab=DSLParser; }
+options { tokenVocab=DSLLexer; }
 
 schedule: sequence+;
 
