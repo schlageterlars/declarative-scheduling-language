@@ -3,12 +3,18 @@ parser grammar DSLParser;
 
 options { tokenVocab=DSLLexer; }
 
-schedule: sequence+;
+schedule: sequence+ ;
 
-sequence: IDENTIFIER TIME_RANGE LEADS_TO place stop* end;
+sequence: identifier time_range LEADS_TO place stop* end? ;
 
-stop: LEADS_TO DURATION place;
+identifier: IDENTIFIER ;
 
-place: PLACE WS? place?;
+time_range: TIME_RANGE ;
 
-end: LEADS_TO DURATION;
+duration: DURATION ;
+
+stop: LEADS_TO duration place ;
+
+place: (PLACE WS?)+ ;
+
+end: LEADS_TO duration ;

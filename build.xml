@@ -9,7 +9,7 @@
     <property name="grammar" value="DSL" />
     <property name="antlr" value="antlr-4.13.1-complete.jar" />
 
-    <target name="jar" depends="compile">
+    <target name="jar" depends="compile, copy-antlr-to-ast">
         <jar destfile="${grammar}.jar">
             <manifest>
                 <attribute name="Main-Class" value="${grammar}Tokenizer"/>
@@ -40,6 +40,24 @@
         </java>
     </target>
 
+    <target name="copy-antlr-to-ast" description="Copy ANTLR-generated Java files to ast directory">
+        <mkdir dir="ast"/>
+        <mkdir dir="ast/generated"/>
+        <copy todir="ast/generated" overwrite="true">
+            <fileset dir=".">
+                <include name="${grammar}Lexer.java"/>
+                <include name="${grammar}Parser.java"/>
+                <include name="${grammar}ParserListener.java"/>
+                <include name="${grammar}ParserBaseListener.java"/>
+            </fileset>
+        </copy>
+        <replaceregexp match="^" replace="package ast.generated;">
+            <fileset dir="ast/generated">
+                <include name="*.java"/>
+            </fileset>
+        </replaceregexp>
+    </target>
+
     <target name="clean">
         <delete>
             <fileset dir="." includes="${grammar}.jar"/>
@@ -50,6 +68,11 @@
             <fileset dir="." includes="${grammar}Parser.java"/>
             <fileset dir="." includes="${grammar}ParserListener.java"/>
             <fileset dir="." includes="${grammar}ParserBaseListener.java"/>
+            <!-- delete copied files-->
+            <fileset dir="ast/generated" includes="${grammar}Lexer.java"/>
+            <fileset dir="ast/generated" includes="${grammar}Parser.java"/>
+            <fileset dir="ast/generated" includes="${grammar}ParserListener.java"/>
+            <fileset dir="ast/generated" includes="${grammar}ParserBaseListener.java"/>
         </delete>
     </target>
 
