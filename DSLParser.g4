@@ -3,7 +3,7 @@ parser grammar DSLParser;
 
 options { tokenVocab=DSLLexer; }
 
-schedule: sequence+ ;
+schedule: sequence+ EOF;
 
 sequence: identifier time_range LEADS_TO place stop* end? ;
 

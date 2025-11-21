@@ -1,5 +1,6 @@
 package ast;
 
+import org.antlr.v4.runtime.Token;
 // DslBuilder.java
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
@@ -26,6 +27,19 @@ public final class DslBuilder extends DSLParserBaseListener {
         new ParseTreeWalker().walk(this, tree);
         return (Schedule) this.stack.pop();    
     }
+
+    private int numberOfSemanticErrors;
+
+    private void semanticError(Token t, String error) {
+        this.numberOfSemanticErrors++;
+        System.err.printf("line %d column %d: %s%n",
+                          t.getLine(), t.getCharPositionInLine(), error);
+    }
+
+    public int getNumberOfSemanticErrors() {
+        return this.numberOfSemanticErrors;
+    }
+
 
     @Override
     public void exitPlace(DSLParser.PlaceContext ctx) {
