@@ -86,6 +86,23 @@ The PNG is written to the working directory using the schedule layout.
 
 ---
 
+
+## 4. TestRig GUI
+
+Launches the ANTLR TestRig GUI to visualize and test the DSL grammar.
+
+1. **Build the project and create the fat JAR**:
+
+\```
+mvn package
+\```
+
+2. **Run the TestRig GUI with your input file**:
+
+\```
+bash grun.sh data/test-data.txt
+\```
+
 ## 🔧 Rebuilding ANTLR Sources
 
 ANTLR grammars are regenerated with:
@@ -105,7 +122,8 @@ mvn clean compile
 ## 📖 Recommended Workflow
 
 1. Run **Tokenize** to verify lexical correctness  
-2. Run **PrintAst** to validate grammar parsing  
-3. Run **GeneratePng** to visualize the final interpreted schedule  
+2. Run **TestRig GUI** to interactively test and visualize the DSL grammar using ANTLR's GUI  
+3. Run **PrintAst** to validate grammar parsing  
+4. Run **GeneratePng** to visualize the final interpreted schedule  
 
 ---

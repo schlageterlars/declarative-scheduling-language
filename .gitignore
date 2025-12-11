@@ -12,3 +12,4 @@
 /target
 /src/main/java/generated
 timeplan.png
+dependency-reduced-pom.xml

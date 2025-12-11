@@ -20,6 +20,22 @@
         <sourceDirectory>src/main/java</sourceDirectory>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.5.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <finalName>DSL</finalName>                         
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.antlr</groupId>
                 <artifactId>antlr4-maven-plugin</artifactId>
                 <version>4.13.1</version>
@@ -33,6 +49,7 @@
                         <configuration>
                             <sourceDirectory>${project.basedir}/src/main/antlr4</sourceDirectory>
                             <outputDirectory>${project.basedir}/src/main/java/generated</outputDirectory>
+                            <package>generated</package>
                             <includes>
                                 <include>DSL*.g4</include>
                             </includes>
@@ -52,6 +69,11 @@
     </build>
 
     <dependencies>
+        <dependency>
+            <groupId>org.antlr</groupId>
+            <artifactId>antlr4</artifactId>
+            <version>4.13.1</version>
+        </dependency>
         <dependency>
             <groupId>org.antlr</groupId>
             <artifactId>antlr4-runtime</artifactId>
