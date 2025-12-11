@@ -45,9 +45,7 @@ src/main/java/generated/
 
 Each tool expects a **DSL input file**, e.g.:
 
-```
-data/test-data.txt
-```
+📄 `data/test-data.txt`
 
 ---
 
@@ -93,15 +91,15 @@ Launches the ANTLR TestRig GUI to visualize and test the DSL grammar.
 
 1. **Build the project and create the fat JAR**:
 
-\```
+```bash
 mvn package
-\```
+```
 
 2. **Run the TestRig GUI with your input file**:
 
-\```
+```bash
 bash grun.sh data/test-data.txt
-\```
+```
 
 ## 🔧 Rebuilding ANTLR Sources
 
