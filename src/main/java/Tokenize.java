@@ -2,11 +2,18 @@
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.Token;
 
-public final class DSLTokenizer {
-    private DSLTokenizer() { }
+import generated.DSLLexer;
+
+public final class Tokenize {
+    private Tokenize() { }
 
     public static void main(String[] args) throws Exception {
-        DSLLexer lexer = new DSLLexer(CharStreams.fromStream(System.in));
+        DSLLexer lexer;
+        if (args.length == 0) {
+            lexer = new DSLLexer(CharStreams.fromStream(System.in));
+        } else {
+            lexer = new DSLLexer(CharStreams.fromFileName(args[0]));
+        }
         var tokens = lexer.getAllTokens();
 
         for (Token t : tokens) {

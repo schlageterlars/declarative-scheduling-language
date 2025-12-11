@@ -1,5 +1,9 @@
 // DSLLexer.g4
 lexer grammar DSLLexer;
+
+@header {
+package generated;
+}
                     
 Number: Digits ('.' Digits)? ;
 

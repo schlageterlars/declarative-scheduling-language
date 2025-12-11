@@ -1,8 +1,8 @@
-package ast;
+package model;
 
 import java.util.List;
 
-public class Sequence {
+public class Sequence implements Visitable {
     private final String id;
     private final TimeRange timeRange;
     private final List<Stop> stops;
@@ -22,4 +22,26 @@ public class Sequence {
         }
         return sb.toString();
     }
+
+    public String getId() {
+        return this.id;
+    }
+
+    public String getEscapedId(){
+        return this.id.replaceAll("[<>]", "");
+    } 
+
+    public TimeRange getTimeRange() {
+        return this.timeRange;
+    }
+
+    public List<Stop> getStops() {
+        return this.stops;
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visitSequence(this);
+    }
+
 }

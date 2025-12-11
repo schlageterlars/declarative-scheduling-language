@@ -1,2 +1,0 @@
-<Bus 12> [07:00 - 14:00] -> Konstanz, Stefansschule -> (5 min) Konstanz, Laube/Niederburg -> (30 min) Konstanz, Sternenplatz -> (20 min)
-<Bus 15> [07:00 - 14:00] -> Konstanz, Stefansschule -> (5 min) Konstanz, Laube/Niederburg -> (30 min) Konstanz, Sternenplatz -> (20 min)

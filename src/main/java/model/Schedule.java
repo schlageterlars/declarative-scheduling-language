@@ -1,8 +1,8 @@
-package ast;
+package model;
 
 import java.util.List;
 
-public class Schedule {
+public class Schedule implements Visitable {
     private final List<Sequence> sequences;
 
     public Schedule(List<Sequence> sequences) {
@@ -16,5 +16,14 @@ public class Schedule {
             sb.append(seq).append("\n");
         }
         return sb.toString();
+    }
+
+    public List<Sequence> getSequences() {
+        return this.sequences;
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visitSchedule(this);
     }
 }

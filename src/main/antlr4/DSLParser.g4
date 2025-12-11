@@ -1,6 +1,10 @@
 // DSLParser.g4
 parser grammar DSLParser;
 
+@header {
+package generated;
+}
+
 options { tokenVocab=DSLLexer; }
 
 schedule: sequence+ EOF;

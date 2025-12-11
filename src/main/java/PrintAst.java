@@ -1,18 +1,25 @@
 // DslToAst.java
-package ast;
+
 
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 
-import ast.generated.DSLLexer;
-import ast.generated.DSLParser;
+import generated.DSLLexer;
+import generated.DSLParser;
+import model.Schedule;
+import processing.Builder;
 
-public final class DslToAst {
-    private DslToAst() { }
+public final class PrintAst {
+    private PrintAst() { }
 
     public static void main(String[] args) throws Exception {
-        DSLLexer lexer = new DSLLexer(CharStreams.fromStream(System.in));
+        DSLLexer lexer;
+        if (args.length == 0) {
+            lexer = new DSLLexer(CharStreams.fromStream(System.in));
+        } else {
+            lexer = new DSLLexer(CharStreams.fromFileName(args[0]));
+        }
         DSLParser parser = new DSLParser(new CommonTokenStream(lexer));
         ParseTree tree = parser.schedule();
         if (parser.getNumberOfSyntaxErrors() > 0) {
@@ -20,7 +27,7 @@ public final class DslToAst {
             System.exit(1);
         }
 
-        Schedule ast = new DslBuilder().build(tree);
+        Schedule ast = new Builder().build(tree);
         System.out.printf("\"%n%s\"%n", ast);
     }
 }

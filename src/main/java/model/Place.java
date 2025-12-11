@@ -1,10 +1,14 @@
-package ast;
+package model;
 
-public class Duration {
+public class Place {
     private final String text;
 
-    public Duration(String text) {
+    public Place(String text) {
         this.text = text;
+    }
+
+    public String getText() {
+        return this.text;
     }
 
     @Override

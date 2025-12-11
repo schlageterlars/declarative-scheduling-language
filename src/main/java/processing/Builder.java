@@ -1,12 +1,17 @@
-package ast;
+package processing;
 
 import org.antlr.v4.runtime.Token;
-// DslBuilder.java
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
-import ast.generated.DSLParser;
-import ast.generated.DSLParserBaseListener;
+import generated.DSLParser;
+import generated.DSLParserBaseListener;
+import model.Duration;
+import model.Place;
+import model.Schedule;
+import model.Sequence;
+import model.Stop;
+import model.TimeRange;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +25,7 @@ import java.util.Stack;
  * - einheitliche Transformation von expr- und multExpr-Knoten
  *   mit drei Kind-Knoten
  */
-public final class DslBuilder extends DSLParserBaseListener {
+public final class Builder extends DSLParserBaseListener {
     private final Stack<Object> stack = new Stack<Object>();
 
     public Schedule build(ParseTree tree) {
@@ -30,6 +35,7 @@ public final class DslBuilder extends DSLParserBaseListener {
 
     private int numberOfSemanticErrors;
 
+    @SuppressWarnings("unused")
     private void semanticError(Token t, String error) {
         this.numberOfSemanticErrors++;
         System.err.printf("line %d column %d: %s%n",
